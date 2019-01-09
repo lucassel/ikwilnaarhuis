@@ -15,7 +15,7 @@ def constructDate(uur, minuten):
 
 
 def calculateLeave(enter):
-		leave = (datetime.datetime.combine(today, enter) + datetime.timedelta(hours=9, minutes=46)).time()
+		leave = (datetime.datetime.combine(today, enter) + datetime.timedelta(hours=9, minutes=48)).time()
 		return leave
  
 
@@ -23,7 +23,7 @@ def main():
 
   parser = argparse.ArgumentParser(description="IK WIL NAAR HUIS")
   parser.add_argument('time', metavar='T', type=int, help='the time you started working in hours')
-  parser.add_argument("-P", "--pauze", type=int, required=False,  dest="break", help="Enter your lunch break in minutes.")
+  parser.add_argument("-l", "--lunch", type=int, required=False,  dest="break", help="Enter your lunch break in minutes.")
 
 
   args = parser.parse_args()

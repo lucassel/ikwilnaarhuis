@@ -22,7 +22,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=["dailify"],
+    packages=["ikwilnaarhuis"],
     include_package_data=True,
     entry_points={
         "console_scripts": [
