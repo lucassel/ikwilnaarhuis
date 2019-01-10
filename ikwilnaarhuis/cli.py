@@ -28,8 +28,7 @@ def main():
   if args.time == None:
     start_hour = now.hour
     start_minutes = now.minute
-    print("ran script with no time input, using current time of {} : {} as your starting time".format(start_hour, start_minutes))
-    
+    print("Script executed without specified time, using current time of day.")
 
   else:
     start_hour = args.time[0]
@@ -44,27 +43,20 @@ def main():
 
     # -l or --lunch is optional parameter for specifing your lunch break duration, 60 minutes default. 
   
-  print("Your starting time is {} : {}".format(start_hour, str(start_minutes).zfill(2)))
+  print("Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)))
 
   if args.lunch == None:
-    print("default lunch break of 60 min")
+    print("No --lunch specified, using default of 60 minutes.")
     pass
   
   else:
-    print("lunch break with user input {}".format(args.lunch))
+    print("Specified --lunch break of {} minutes".format(args.lunch))
     pass
 
   enter = constructDate(start_hour, start_minutes)
-  
   leave = calculateLeave(enter)
-
-
   
-  print("You are allowed to leave at " + leave.strftime("%H:%M" + " my nigga"))
-
-  # if no break time specified, run with a standard break time of 60 minutes.
-  # inform user when they don't enter a lunch break duration.
-
+  print("You are allowed to leave at " + leave.strftime("%H:%M" + " my fren."))
 
 
 if __name__ == "__main__":
