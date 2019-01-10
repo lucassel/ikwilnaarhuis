@@ -27,17 +27,16 @@ def main():
   # if run with no integers then we use the script execution time as starting moment of the day
   if args.time == None:
     start_hour = now.hour
-    minutes = now.minute
-    print("ran script with no time input, using current time of {} : {} as your starting time".format(start_hour, minutes))
+    start_minutes = now.minute
+    print("ran script with no time input, using current time of {} : {} as your starting time".format(start_hour, start_minutes))
     
 
   else:
     start_hour = args.time[0]
     try: 
-      minutes = args.time[1]
+      start_minutes = args.time[1]
     except:
-      print("no mins specified, using default of 0")
-      minutes = 0
+      start_minutes = 0
     # try to parse an hour out of two integers
     # first integer is always interpreted as an hour
     # second integer is always interpreted as minutes
@@ -45,6 +44,7 @@ def main():
 
     # -l or --lunch is optional parameter for specifing your lunch break duration, 60 minutes default. 
   
+  print("Your starting time is {} : {}".format(start_hour, str(start_minutes).zfill(2)))
 
   if args.lunch == None:
     print("default lunch break of 60 min")
@@ -54,7 +54,7 @@ def main():
     print("lunch break with user input {}".format(args.lunch))
     pass
 
-  enter = constructDate(start_hour, minutes)
+  enter = constructDate(start_hour, start_minutes)
   
   leave = calculateLeave(enter)
 

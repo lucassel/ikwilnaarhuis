@@ -10,7 +10,7 @@ def readme():
 
 setup(
     name="ikwilnaarhuis",
-    version="0.0.0.0.2",
+    version="0.0.0.0.3.1",
     description="A Python CLI package for people who think 'IK WIL NAAR HUIS'.",
     long_description=readme(),
     long_description_content_type="text/plain",
