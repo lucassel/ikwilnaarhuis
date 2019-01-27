@@ -2,6 +2,8 @@
 
 A Python CLI tool to help people who think 'IK WIL NAAR HUIS'.
 
+![https://imgix.ttcdn.co/i/product/original/0/532772-51cb22d9b8f04f71bd347ed4b7fb07c4.jpeg?q=100&auto=format%2Ccompress&w=1000]
+
 # Usage
 
 ``` $ ikwilnaarhuis ```
