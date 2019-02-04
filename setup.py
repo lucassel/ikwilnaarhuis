@@ -10,7 +10,7 @@ def readme():
 
 setup(
     name="ikwilnaarhuis",
-    version="0.0.0.0.3.1",
+    version="0.0.0.3.2",
     description="A Python CLI package for people who think 'IK WIL NAAR HUIS'.",
     long_description=readme(),
     long_description_content_type="text/plain",
@@ -23,6 +23,9 @@ setup(
         "Programming Language :: Python :: 3.7",
     ],
     packages=["ikwilnaarhuis"],
+    install_requires=[
+          'pyinsults',
+      ],
     include_package_data=True,
     entry_points={
         "console_scripts": [

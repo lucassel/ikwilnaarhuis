@@ -1,6 +1,7 @@
 import argparse, datetime
 from datetime import time
 from datetime import date
+from pyinsults import insults
 
 today = date.today()
 
@@ -56,7 +57,7 @@ def main():
   enter = constructDate(start_hour, start_minutes)
   leave = calculateLeave(enter)
   
-  print("You are allowed to leave at " + leave.strftime("%H:%M" + " my fren."))
+  print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ".")
 
 
 if __name__ == "__main__":
