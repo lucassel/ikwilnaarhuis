@@ -31,15 +31,13 @@ def milestones():
   first_day = datetime.date(2018, 6, 11)
   amelie = datetime.date(2018,8,25)
   one_year = datetime.date(2019,6,11)
-
+  
   delta = today - first_day
   anniversary = one_year - today
   gurl = today - amelie
 
-
   print("It's been {} days since you've started working at In The Pocket, that's about {} months! 👏".format(delta.days, days2months(delta.days)))
   print("You've got {} days left till your work anniversary. 🎉".format(anniversary.days))
-
   print("You've been banging that sweet ass for {} days, that's about {} months 🍑".format(gurl.days, days2months(gurl.days)))
   print("\n")
 
@@ -51,7 +49,7 @@ def main():
   greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
   print(colored(greeting, 'green'))
 
-  parser = argparse.ArgumentParser(description="IK WIL NAAR HUIS")
+  parser = argparse.ArgumentParser(description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS a lot")
   parser.add_argument('-t', '--time', nargs="+", metavar='T', type=int, help='the time you started working in hours, optional')
   parser.add_argument("-l", "--lunch", metavar='L', type=int, required=False,  dest="lunch", help="Enter your lunch break in minutes.")
   parser.add_argument('-m', '--milestones', help="print milestones", action='store_true')
@@ -61,7 +59,8 @@ def main():
     milestones()
 
   args = parser.parse_args()
-
+  # @todo Switch to namespace
+  # @body if statements suck.
   # if run with no integers then we use the script execution time as starting moment of the day
   if args.time == None:
     start_hour = now.hour
