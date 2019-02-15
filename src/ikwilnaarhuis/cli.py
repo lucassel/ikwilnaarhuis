@@ -78,6 +78,9 @@ def main():
     # second integer is always interpreted as minutes
     # if not second integer, we use minutes = 0
 
+
+    # TODO testing issues
+
     # -l or --lunch is optional parameter for specifing your lunch break duration, 60 minutes default. 
   
   print("⏰ Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)))
