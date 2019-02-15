@@ -44,6 +44,7 @@ def milestones():
   print("You've got {} days left till your work anniversary".format(anniversary.days))
 
   print("You've been banging that sweet ass for {} days, that's about {} months".format(gurl.days, days2months(gurl.days)))
+  print("\n")
 
 
 
