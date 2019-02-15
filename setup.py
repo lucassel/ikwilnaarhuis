@@ -1,35 +1,24 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+    Setup file for ikwilnaarhuis.
+    Use setup.cfg to configure your project.
+
+    This file was generated with PyScaffold 3.1.
+    PyScaffold helps you to put up the scaffold of your new Python project.
+    Learn more under: https://pyscaffold.org/
+"""
+import sys
+
+from pkg_resources import require, VersionConflict
 from setuptools import setup
 
- 
+try:
+    require('setuptools>=38.3')
+except VersionConflict:
+    print("Error: version of setuptools is too old (<38.3)!")
+    sys.exit(1)
 
-def readme():
-    with open('README.md', encoding='utf-8') as f:
-        README = f.read()
-    return README
 
-
-setup(
-    name="ikwilnaarhuis",
-    version="0.0.0.3.2",
-    description="A Python CLI package for people who think 'IK WIL NAAR HUIS'.",
-    long_description=readme(),
-    long_description_content_type="text/plain",
-    url="https://github.com/lucassel/ikwilnaarhuis",
-    author="Lucas Selfslagh",
-    license="MIT",
-    classifiers=[
-        "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
-    ],
-    packages=["ikwilnaarhuis"],
-    install_requires=[
-          'pyinsults',
-      ],
-    include_package_data=True,
-    entry_points={
-        "console_scripts": [
-            "ikwilnaarhuis=ikwilnaarhuis.cli:main",
-        ]
-    },
-)
+if __name__ == "__main__":
+    setup(use_pyscaffold=True)
