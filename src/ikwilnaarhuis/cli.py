@@ -12,11 +12,6 @@ from termcolor import colored
 colorama.init()
 
 today = date.today()
-first_day = datetime.date(2018, 6, 11)
-amelie = datetime.date(2018,8,25)
-one_year = datetime.date(2019,6,11)
-
-
 
 def hello():
     return "he"
@@ -33,17 +28,19 @@ def days2months(days):
     return days/30
 
 def milestones():
+  first_day = datetime.date(2018, 6, 11)
+  amelie = datetime.date(2018,8,25)
+  one_year = datetime.date(2019,6,11)
+
   delta = today - first_day
   anniversary = one_year - today
-
-
   gurl = today - amelie
 
 
-  print("It's been {} days since you've started working at In The Pocket, that's about {} months!".format(delta.days, days2months(delta.days)))
-  print("You've got {} days left till your work anniversary".format(anniversary.days))
+  print("It's been {} days since you've started working at In The Pocket, that's about {} months! 👏".format(delta.days, days2months(delta.days)))
+  print("You've got {} days left till your work anniversary. 🎉".format(anniversary.days))
 
-  print("You've been banging that sweet ass for {} days, that's about {} months".format(gurl.days, days2months(gurl.days)))
+  print("You've been banging that sweet ass for {} days, that's about {} months 🍑".format(gurl.days, days2months(gurl.days)))
   print("\n")
 
 
@@ -51,7 +48,7 @@ def milestones():
 def main():
   now = datetime.datetime.now()
   lunch = 60
-  greeting = "Happy {}, {}!".format(calendar.day_name[today.weekday()], getpass.getuser())
+  greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
   print(colored(greeting, 'green'))
 
   parser = argparse.ArgumentParser(description="IK WIL NAAR HUIS")
@@ -65,18 +62,11 @@ def main():
 
   args = parser.parse_args()
 
-
-
- 
-
-
-
-  
   # if run with no integers then we use the script execution time as starting moment of the day
   if args.time == None:
     start_hour = now.hour
     start_minutes = now.minute
-    print("Script executed without specified time, using ==> {}:{}.".format(now.hour, now.minute))
+    print("⚠ Script executed without specified time, using ==> {}:{}.".format(now.hour, now.minute))
 
   else:
     start_hour = args.time[0]
@@ -91,20 +81,20 @@ def main():
 
     # -l or --lunch is optional parameter for specifing your lunch break duration, 60 minutes default. 
   
-  print("Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)))
+  print("⏰ Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)))
 
   if args.lunch == None:
-    print("No --lunch specified, using default of {} minutes!".format(lunch))  
+    print("🍽 No --lunch specified, using default of {} minutes!".format(lunch))  
   
   else:
-    print("Specified --lunch break of {} minutes".format(args.lunch))
+    print("🍽 Specified --lunch break of {} minutes".format(args.lunch))
     lunch = args.lunch
     
 
   enter = constructDate(start_hour, start_minutes)
   leave = calculateLeave(enter, lunch)
   
-  print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ".")
+  print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍")
 
 if __name__ == "__main__":
   main()
