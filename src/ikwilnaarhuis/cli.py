@@ -53,6 +53,7 @@ def milestones():
 
 
 def main():
+<<<<<<< HEAD
     now = datetime.datetime.now()
     lunch = 60
     greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
@@ -119,6 +120,56 @@ def main():
         leave = calculateLeave(enter, lunch)
         print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍")
 
+=======
+  now = datetime.datetime.now()
+  lunch = 60
+  # TODO implement weekdays
+  greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
+  print(colored(greeting, 'green'))
+
+  parser = argparse.ArgumentParser(description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS a lot")
+  parser.add_argument('-t', '--time', nargs="+", metavar='T', type=int, help='the time you started working in hours, optional')
+  parser.add_argument("-l", "--lunch", metavar='L', type=int, required=False,  dest="lunch", help="Enter your lunch break in minutes.")
+  parser.add_argument('-m', '--milestones', help="print milestones", action='store_true')
+
+  namespace = parser.parse_args(sys.argv[1:])
+  if namespace.milestones:
+    milestones()
+
+  args = parser.parse_args()
+  #  Switch to namespace
+  #  if statements suck.
+  # if run with no integers then we use the script execution time as starting moment of the day
+  if args.time == None:
+    start_hour = now.hour
+    start_minutes = now.minute
+    print("⚠ Script executed without specified time, using ==> {}:{}.".format(now.hour, now.minute))
+
+  else:
+    start_hour = args.time[0]
+    try: 
+      start_minutes = args.time[1]
+    except:
+      start_minutes = 0
+    # try to parse an hour out of two integers
+    # first integer is always interpreted as an hour
+    # second integer is always interpreted as minutes
+    # if not second integer, we use minutes = 0
+
+
+    # TODO testing issues
+
+    # -l or --lunch is optional parameter for specifing your lunch break duration, 60 minutes default. 
+  
+  print("⏰ Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)))
+
+  if args.lunch == None:
+    print("🍽 No --lunch specified, using default of {} minutes!".format(lunch))  
+  
+  else:
+    print("🍽 Specified --lunch break of {} minutes".format(args.lunch))
+    lunch = args.lunch
+>>>>>>> 98e264173789d1547eb0bd588f78b2f34aedb7b3
     
 
    
