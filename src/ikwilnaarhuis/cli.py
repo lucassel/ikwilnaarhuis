@@ -33,7 +33,8 @@ def milestones():
     delta = today - first_day
     anniversary = one_year - today
     gurl = today - amelie
-
+    print("\n")
+    print("*** MILESTONES ***")
     print("It's been {} days since you've started working at In The Pocket, that's about {} months! 👏".format(
         delta.days, days2months(delta.days)))
     print("You've got {} days left till your work anniversary. 🎉".format(
@@ -44,10 +45,14 @@ def milestones():
 
 
 def main():
+
     colorama.init()
     now = datetime.datetime.now()
     lunch = 60
+    # TODO different greetings based on weekday, prepare for workweek support.
+    
     greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
+    
     print(colored(greeting, 'cyan'))
 
     # we got some --parameters allright
@@ -82,8 +87,7 @@ def main():
 
     print(colored("⏰ Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)), 'green'))
 
-    if namespace.milestones:
-        milestones()
+    
 
     if namespace.lunch:
         print("🍽 Specified --lunch break of {} minutes".format(args.lunch))
@@ -95,6 +99,9 @@ def main():
     enter = constructDate(start_hour, start_minutes)
     leave = calculateLeave(enter, lunch)
     print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍")
+
+    if namespace.milestones:
+        milestones()
 
 
 if __name__ == "__main__":
