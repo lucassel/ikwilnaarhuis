@@ -85,11 +85,7 @@ def main():
     else: 
       start_hour = now.hour
       start_minutes = now.minute
-      print(colored("⚠ You executed 'ikwilnaarhuis' without specifying a time!", 'yellow'))
-
-    print(colored("⏰ Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)), 'green'))
-
-    
+      print(colored("⚠ You executed 'ikwilnaarhuis' without specifying a time, using current time!", 'yellow'))
 
     if namespace.lunch:
         print(colored("🍽 Specified --lunch break of {} minutes".format(args.lunch), 'blue'))
@@ -97,6 +93,8 @@ def main():
 
     else:
         print(colored("🍽 No --lunch specified, using default of {} minutes!".format(lunch), 'yellow'))
+
+    print(colored("⏰ Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)), 'green'))
 
     enter = constructDate(start_hour, start_minutes)
     leave = calculateLeave(enter, lunch)
