@@ -46,6 +46,7 @@ def milestones():
 def main():
   now = datetime.datetime.now()
   lunch = 60
+  # TODO implement weekdays
   greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
   print(colored(greeting, 'green'))
 
@@ -59,8 +60,8 @@ def main():
     milestones()
 
   args = parser.parse_args()
-  # @todo Switch to namespace
-  # @body if statements suck.
+  #  Switch to namespace
+  #  if statements suck.
   # if run with no integers then we use the script execution time as starting moment of the day
   if args.time == None:
     start_hour = now.hour

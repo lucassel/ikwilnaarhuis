@@ -14,5 +14,4 @@
 # Example:
 # numpy==1.13.3
 # scipy==1.0
-pyinsulst>0.0.0.0.10
 
