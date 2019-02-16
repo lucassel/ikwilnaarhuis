@@ -44,7 +44,7 @@ def milestones():
 
 def daycheck(weekday):
     if weekday > 4:
-        print(colored("why the fuck you running ikwilnaarhuis in the weekend for???", 'yellow'))
+        print(colored("Um, why the fuck are you running 'ikwilnaarhuis' in the weekend??? 🤷‍♂️🤷‍♀️", 'yellow'))
     else:
         greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
         print(colored(greeting, 'cyan'))
@@ -92,7 +92,7 @@ def main():
     
 
     if namespace.lunch:
-        print("🍽 Specified --lunch break of {} minutes".format(args.lunch))
+        print(colored("🍽 Specified --lunch break of {} minutes".format(args.lunch), 'blue'))
         lunch = args.lunch
 
     else:
@@ -100,7 +100,8 @@ def main():
 
     enter = constructDate(start_hour, start_minutes)
     leave = calculateLeave(enter, lunch)
-    print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍")
+
+    print(colored("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍", 'green'))
 
     if namespace.milestones:
         milestones()
