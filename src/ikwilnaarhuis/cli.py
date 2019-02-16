@@ -9,6 +9,7 @@ from datetime import date
 from pyinsults import insults
 import colorama
 from termcolor import colored
+import pkg_resources  # part of setuptools
 
 
 
@@ -33,14 +34,14 @@ def milestones():
     delta = today - first_day
     anniversary = one_year - today
     gurl = today - amelie
-    print("\n")
+    
     print(colored("*** MILESTONES ***", 'magenta'))
     print(colored("It's been {} days since you've started working at In The Pocket, that's about {} months! 👏".format(delta.days, days2months(delta.days)), 'cyan'))
     print("You've got {} days left till your work anniversary. 🎉".format(
         anniversary.days))
     print("You've been banging that sweet ass for {} days, that's about {} months 🍑".format(
         gurl.days, days2months(gurl.days)))
-    print("\n")
+    
 
 def daycheck(weekday):
     if weekday > 4:
@@ -55,7 +56,7 @@ def main():
     colorama.init()
     now = datetime.datetime.now()
     lunch = 60    
-    daycheck(today.weekday())
+    
 
     # we got some --parameters allright
     parser = argparse.ArgumentParser(description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS (a lot).")
@@ -64,9 +65,21 @@ def main():
     parser.add_argument('-t', '--time', nargs="+", metavar='T', type=int, help='The time you started working in hours, optional')
     parser.add_argument("-l", "--lunch", metavar='L', type=int, required=False, dest="lunch", help="Enter your lunch break in minutes.")
     parser.add_argument('-m', '--milestones', help="print milestones", action='store_true')
+    parser.add_argument('-v', '--version', help="print version", action='store_true')
     
     namespace = parser.parse_args(sys.argv[1:])
     args = parser.parse_args()
+
+    if namespace.version:
+      version = pkg_resources.require("ikwilnaarhuis")[0].version
+      print("ikwilnaarhuis --version: {}".format(version))
+      return
+
+    if namespace.milestones:
+      milestones()
+      return
+
+    daycheck(today.weekday())
 
     if namespace.integers:
       start_hour = args.integers[0]
@@ -107,8 +120,7 @@ def main():
 
     print(colored("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍", 'green'))
 
-    if namespace.milestones:
-        milestones()
+   
 
 
 if __name__ == "__main__":

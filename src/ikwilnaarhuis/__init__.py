@@ -9,3 +9,7 @@ except DistributionNotFound: # pragma: no cover
     __version__ = 'unknown'
 finally: # pragma: no cover
     del get_distribution, DistributionNotFound
+
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
