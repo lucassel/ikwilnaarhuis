@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import argparse, datetime
+import argparse
+import datetime
 import calendar
 import getpass
 import sys
@@ -13,90 +14,115 @@ colorama.init()
 
 today = date.today()
 
+
 def hello():
     return "he"
 
+
 def constructDate(uur, minuten):
-		enter = time(uur,minuten)
-		return enter
+    enter = time(uur, minuten)
+    return enter
+
 
 def calculateLeave(enter, lunch):
-		leave = (datetime.datetime.combine(today, enter) + datetime.timedelta(hours=7, minutes=48) + datetime.timedelta(minutes = lunch)).time()
-		return leave
+    leave = (datetime.datetime.combine(today, enter) + datetime.timedelta(hours=7,
+                                                                          minutes=48) + datetime.timedelta(minutes=lunch)).time()
+    return leave
+
 
 def days2months(days):
     return days/30
 
+
 def milestones():
-  first_day = datetime.date(2018, 6, 11)
-  amelie = datetime.date(2018,8,25)
-  one_year = datetime.date(2019,6,11)
-  
-  delta = today - first_day
-  anniversary = one_year - today
-  gurl = today - amelie
+    first_day = datetime.date(2018, 6, 11)
+    amelie = datetime.date(2018, 8, 25)
+    one_year = datetime.date(2019, 6, 11)
 
-  print("It's been {} days since you've started working at In The Pocket, that's about {} months! 👏".format(delta.days, days2months(delta.days)))
-  print("You've got {} days left till your work anniversary. 🎉".format(anniversary.days))
-  print("You've been banging that sweet ass for {} days, that's about {} months 🍑".format(gurl.days, days2months(gurl.days)))
-  print("\n")
+    delta = today - first_day
+    anniversary = one_year - today
+    gurl = today - amelie
 
+    print("It's been {} days since you've started working at In The Pocket, that's about {} months! 👏".format(
+        delta.days, days2months(delta.days)))
+    print("You've got {} days left till your work anniversary. 🎉".format(
+        anniversary.days))
+    print("You've been banging that sweet ass for {} days, that's about {} months 🍑".format(
+        gurl.days, days2months(gurl.days)))
+    print("\n")
 
 
 def main():
-  now = datetime.datetime.now()
-  lunch = 60
-  greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
-  print(colored(greeting, 'green'))
+    now = datetime.datetime.now()
+    lunch = 60
+    greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
+    print(colored(greeting, 'green'))
 
-  parser = argparse.ArgumentParser(description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS a lot")
-  parser.add_argument('-t', '--time', nargs="+", metavar='T', type=int, help='the time you started working in hours, optional')
-  parser.add_argument("-l", "--lunch", metavar='L', type=int, required=False,  dest="lunch", help="Enter your lunch break in minutes.")
-  parser.add_argument('-m', '--milestones', help="print milestones", action='store_true')
+    if len(sys.argv) == 3:
+      start_hour = int(sys.argv[1])
+      start_minutes = int(sys.argv[2])
+      print("parsing time from no parameter {}:{}".format(start_hour, start_minutes))
+    
+      enter = constructDate(start_hour, start_minutes)
+      leave = calculateLeave(enter, lunch)
+      print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍")
 
-  namespace = parser.parse_args(sys.argv[1:])
-  if namespace.milestones:
-    milestones()
+    else:
+        # we got some --parameters allright
+        parser = argparse.ArgumentParser(
+        description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS (a lot).")
+        parser.add_argument('-t', '--time', nargs="+", metavar='T', type=int,
+                            help='The time you started working in hours, optional')
+        parser.add_argument("-l", "--lunch", metavar='L', type=int, required=False,
+                            dest="lunch", help="Enter your lunch break in minutes.")
+        parser.add_argument('-m', '--milestones',
+                            help="print milestones", action='store_true')
+        namespace = parser.parse_args(sys.argv[1:])
+        args = parser.parse_args()
 
-  args = parser.parse_args()
-  # @todo Switch to namespace
-  # @body if statements suck.
-  # if run with no integers then we use the script execution time as starting moment of the day
-  if args.time == None:
-    start_hour = now.hour
-    start_minutes = now.minute
-    print("⚠ Script executed without specified time, using ==> {}:{}.".format(now.hour, now.minute))
+        # if run with no integers then we use the script execution time as starting moment of the day
+        if namespace.time:
+            start_hour = args.time[0]
+            try:
+                start_minutes = args.time[1]
+            except:
+                start_minutes = 0
 
-  else:
-    start_hour = args.time[0]
-    try: 
-      start_minutes = args.time[1]
-    except:
-      start_minutes = 0
-    # try to parse an hour out of two integers
-    # first integer is always interpreted as an hour
-    # second integer is always interpreted as minutes
-    # if not second integer, we use minutes = 0
+        else:
+            start_hour = now.hour
+            start_minutes = now.minute
+            print("⚠ Script executed without specified time, using ==> {}:{}.".format(now.hour, now.minute))
 
+            # try to parse an hour out of two integers
+            # first integer is always interpreted as an hour
+            # second integer is always interpreted as minutes
+            # if not second integer, we use minutes = 0
 
-    # TODO testing issues
+            # TODO testing issues
 
-    # -l or --lunch is optional parameter for specifing your lunch break duration, 60 minutes default. 
-  
-  print("⏰ Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)))
+            # -l or --lunch is optional parameter for specifing your lunch break duration, 60 minutes default.
 
-  if args.lunch == None:
-    print("🍽 No --lunch specified, using default of {} minutes!".format(lunch))  
-  
-  else:
-    print("🍽 Specified --lunch break of {} minutes".format(args.lunch))
-    lunch = args.lunch
+        print("⏰ Your starting time is {} : {}.".format(
+            start_hour, str(start_minutes).zfill(2)))
+
+        if namespace.milestones:
+            milestones()
+
+        if namespace.lunch:
+            print("🍽 Specified --lunch break of {} minutes".format(args.lunch))
+            lunch = args.lunch
+
+        else:
+            print("🍽 No --lunch specified, using default of {} minutes!".format(lunch))
+        
+        enter = constructDate(start_hour, start_minutes)
+        leave = calculateLeave(enter, lunch)
+        print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍")
+
     
 
-  enter = constructDate(start_hour, start_minutes)
-  leave = calculateLeave(enter, lunch)
-  
-  print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍")
+   
+
 
 if __name__ == "__main__":
-  main()
+    main()
