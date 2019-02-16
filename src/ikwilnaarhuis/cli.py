@@ -34,26 +34,28 @@ def milestones():
     anniversary = one_year - today
     gurl = today - amelie
     print("\n")
-    print("*** MILESTONES ***")
-    print("It's been {} days since you've started working at In The Pocket, that's about {} months! 👏".format(
-        delta.days, days2months(delta.days)))
+    print(colored("*** MILESTONES ***", 'magenta'))
+    print(colored("It's been {} days since you've started working at In The Pocket, that's about {} months! 👏".format(delta.days, days2months(delta.days)), 'cyan'))
     print("You've got {} days left till your work anniversary. 🎉".format(
         anniversary.days))
     print("You've been banging that sweet ass for {} days, that's about {} months 🍑".format(
         gurl.days, days2months(gurl.days)))
     print("\n")
 
+def daycheck(weekday):
+    if weekday > 4:
+        print(colored("why the fuck you running ikwilnaarhuis in the weekend for???", 'yellow'))
+    else:
+        greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
+        print(colored(greeting, 'cyan'))
+
 
 def main():
 
     colorama.init()
     now = datetime.datetime.now()
-    lunch = 60
-    # TODO different greetings based on weekday, prepare for workweek support.
-    
-    greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
-    
-    print(colored(greeting, 'cyan'))
+    lunch = 60    
+    daycheck(today.weekday())
 
     # we got some --parameters allright
     parser = argparse.ArgumentParser(description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS (a lot).")
@@ -83,7 +85,7 @@ def main():
     else: 
       start_hour = now.hour
       start_minutes = now.minute
-      print(colored("⚠ You executed 'ikwilnaarhuis' without specifying the time!", 'red'))
+      print(colored("⚠ You executed 'ikwilnaarhuis' without specifying a time!", 'yellow'))
 
     print(colored("⏰ Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)), 'green'))
 
