@@ -75,12 +75,17 @@ def main():
       except:
           start_minutes = 0
 
+    print(colored("⏰ Specified starting time: {}:{}".format(start_hour, start_minutes), 'blue'))
+
+
     elif namespace.time:
       start_hour = args.time[0]
       try:
           start_minutes = args.time[1]
       except:
           start_minutes = 0
+
+      print(colored("⏰ Specified starting --time: {}:{}".format(start_hour, start_minutes), 'blue'))
 
     else: 
       start_hour = now.hour
