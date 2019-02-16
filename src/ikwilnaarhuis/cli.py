@@ -34,12 +34,12 @@ def milestones():
     anniversary = one_year - today
     gurl = today - amelie
     print("\n")
-    print(colored("*** MILESTONES ***", 'magenta'))
-    print(colored("It's been {} days since you've started working at In The Pocket, that's about {} months! 👏".format(delta.days, days2months(delta.days)), 'cyan'))
-    print("You've got {} days left till your work anniversary. 🎉".format(
-        anniversary.days))
-    print("You've been banging that sweet ass for {} days, that's about {} months 🍑".format(
-        gurl.days, days2months(gurl.days)))
+    print(colored("*** MILESTONES ***", 'green'))
+    print(colored("You've worked at In The Pocket for {} days ({} months)! 👏".format(delta.days, days2months(delta.days)), 'cyan'))
+    print(colored("You've got {} days left till your work anniversary. 🎉".format(anniversary.days), 'cyan'))
+    print("\n")
+    print(colored("You've been banging that sweet 🍑 for {} days! 💞".format(gurl.days), 'magenta'))
+    print(colored("That's about {} months already. 🐎".format(days2months(gurl.days)), 'magenta'))
     print("\n")
 
 def daycheck(weekday):
