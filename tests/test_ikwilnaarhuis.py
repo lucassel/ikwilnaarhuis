@@ -30,4 +30,3 @@ def test_leave():
 	leave = (datetime.datetime.combine(today, start) + datetime.timedelta(minutes=lunch) + datetime.timedelta(hours=7, minutes=48)).time()
 	leave_temp = ikwilnaarhuis.cli.calculateLeave(start, lunch)
 	assert leave == leave_temp
-	

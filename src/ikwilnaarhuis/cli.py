@@ -10,29 +10,20 @@ from pyinsults import insults
 import colorama
 from termcolor import colored
 
-colorama.init()
+
 
 today = date.today()
-
-
-def hello():
-    return "he"
-
 
 def constructDate(uur, minuten):
     enter = time(uur, minuten)
     return enter
 
-
 def calculateLeave(enter, lunch):
-    leave = (datetime.datetime.combine(today, enter) + datetime.timedelta(hours=7,
-                                                                          minutes=48) + datetime.timedelta(minutes=lunch)).time()
+    leave = (datetime.datetime.combine(today, enter) + datetime.timedelta(hours=7, minutes=48) + datetime.timedelta(minutes=lunch)).time()
     return leave
-
 
 def days2months(days):
     return days/30
-
 
 def milestones():
     first_day = datetime.date(2018, 6, 11)
@@ -53,126 +44,57 @@ def milestones():
 
 
 def main():
-<<<<<<< HEAD
+    colorama.init()
     now = datetime.datetime.now()
     lunch = 60
     greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
-    print(colored(greeting, 'green'))
+    print(colored(greeting, 'cyan'))
 
-    if len(sys.argv) == 3:
-      start_hour = int(sys.argv[1])
-      start_minutes = int(sys.argv[2])
-      print("parsing time from no parameter {}:{}".format(start_hour, start_minutes))
+    # we got some --parameters allright
+    parser = argparse.ArgumentParser(description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS (a lot).")
+
+    parser.add_argument('integers', metavar='N', type=int, nargs='*', help='Time input without --time flag.', default = [])
+    parser.add_argument('-t', '--time', nargs="+", metavar='T', type=int, help='The time you started working in hours, optional')
+    parser.add_argument("-l", "--lunch", metavar='L', type=int, required=False, dest="lunch", help="Enter your lunch break in minutes.")
+    parser.add_argument('-m', '--milestones', help="print milestones", action='store_true')
     
-      enter = constructDate(start_hour, start_minutes)
-      leave = calculateLeave(enter, lunch)
-      print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍")
+    namespace = parser.parse_args(sys.argv[1:])
+    args = parser.parse_args()
+
+    if namespace.integers:
+      start_hour = args.integers[0]
+      try:
+          start_minutes = args.integers[1]
+      except:
+          start_minutes = 0
+
+    elif namespace.time:
+      start_hour = args.time[0]
+      try:
+          start_minutes = args.time[1]
+      except:
+          start_minutes = 0
+
+    else: 
+      start_hour = now.hour
+      start_minutes = now.minute
+      print(colored("⚠ You executed 'ikwilnaarhuis' without specifying the time!", 'red'))
+
+    print(colored("⏰ Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)), 'green'))
+
+    if namespace.milestones:
+        milestones()
+
+    if namespace.lunch:
+        print("🍽 Specified --lunch break of {} minutes".format(args.lunch))
+        lunch = args.lunch
 
     else:
-        # we got some --parameters allright
-        parser = argparse.ArgumentParser(
-        description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS (a lot).")
-        parser.add_argument('-t', '--time', nargs="+", metavar='T', type=int,
-                            help='The time you started working in hours, optional')
-        parser.add_argument("-l", "--lunch", metavar='L', type=int, required=False,
-                            dest="lunch", help="Enter your lunch break in minutes.")
-        parser.add_argument('-m', '--milestones',
-                            help="print milestones", action='store_true')
-        namespace = parser.parse_args(sys.argv[1:])
-        args = parser.parse_args()
+        print(colored("🍽 No --lunch specified, using default of {} minutes!".format(lunch), 'yellow'))
 
-        # if run with no integers then we use the script execution time as starting moment of the day
-        if namespace.time:
-            start_hour = args.time[0]
-            try:
-                start_minutes = args.time[1]
-            except:
-                start_minutes = 0
-
-        else:
-            start_hour = now.hour
-            start_minutes = now.minute
-            print("⚠ Script executed without specified time, using ==> {}:{}.".format(now.hour, now.minute))
-
-            # try to parse an hour out of two integers
-            # first integer is always interpreted as an hour
-            # second integer is always interpreted as minutes
-            # if not second integer, we use minutes = 0
-
-            # TODO testing issues
-
-            # -l or --lunch is optional parameter for specifing your lunch break duration, 60 minutes default.
-
-        print("⏰ Your starting time is {} : {}.".format(
-            start_hour, str(start_minutes).zfill(2)))
-
-        if namespace.milestones:
-            milestones()
-
-        if namespace.lunch:
-            print("🍽 Specified --lunch break of {} minutes".format(args.lunch))
-            lunch = args.lunch
-
-        else:
-            print("🍽 No --lunch specified, using default of {} minutes!".format(lunch))
-        
-        enter = constructDate(start_hour, start_minutes)
-        leave = calculateLeave(enter, lunch)
-        print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍")
-
-=======
-  now = datetime.datetime.now()
-  lunch = 60
-  # TODO implement weekdays
-  greeting = "Happy {}, {}! 👋".format(calendar.day_name[today.weekday()], getpass.getuser())
-  print(colored(greeting, 'green'))
-
-  parser = argparse.ArgumentParser(description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS a lot")
-  parser.add_argument('-t', '--time', nargs="+", metavar='T', type=int, help='the time you started working in hours, optional')
-  parser.add_argument("-l", "--lunch", metavar='L', type=int, required=False,  dest="lunch", help="Enter your lunch break in minutes.")
-  parser.add_argument('-m', '--milestones', help="print milestones", action='store_true')
-
-  namespace = parser.parse_args(sys.argv[1:])
-  if namespace.milestones:
-    milestones()
-
-  args = parser.parse_args()
-  #  Switch to namespace
-  #  if statements suck.
-  # if run with no integers then we use the script execution time as starting moment of the day
-  if args.time == None:
-    start_hour = now.hour
-    start_minutes = now.minute
-    print("⚠ Script executed without specified time, using ==> {}:{}.".format(now.hour, now.minute))
-
-  else:
-    start_hour = args.time[0]
-    try: 
-      start_minutes = args.time[1]
-    except:
-      start_minutes = 0
-    # try to parse an hour out of two integers
-    # first integer is always interpreted as an hour
-    # second integer is always interpreted as minutes
-    # if not second integer, we use minutes = 0
-
-
-    # TODO testing issues
-
-    # -l or --lunch is optional parameter for specifing your lunch break duration, 60 minutes default. 
-  
-  print("⏰ Your starting time is {} : {}.".format(start_hour, str(start_minutes).zfill(2)))
-
-  if args.lunch == None:
-    print("🍽 No --lunch specified, using default of {} minutes!".format(lunch))  
-  
-  else:
-    print("🍽 Specified --lunch break of {} minutes".format(args.lunch))
-    lunch = args.lunch
->>>>>>> 98e264173789d1547eb0bd588f78b2f34aedb7b3
-    
-
-   
+    enter = constructDate(start_hour, start_minutes)
+    leave = calculateLeave(enter, lunch)
+    print("You are allowed to leave at " + leave.strftime("%H:%M") + ", you " + insults.long_insult() + ". 😍")
 
 
 if __name__ == "__main__":
