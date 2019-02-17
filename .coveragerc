@@ -1,5 +1,7 @@
 # .coveragerc to control coverage.py
 [run]
+data_file = .coverage
+
 branch = True
 source = ikwilnaarhuis
 # omit = bad_file.py
