@@ -2,18 +2,24 @@
 ikwilnaarhuis
 =============
 
+A (cross-platform) Python CLI tool to help people who feel like 'IK WIL NAAR HUIS'.
 
-Add a short description here!
 
-
-Description
+Usage
 ===========
 
-A longer description of your project goes here...
+``ikwilnaarhuis``
 
 
-Note
-====
+``ikwilnaarhuis 9 15``
 
-This project has been set up using PyScaffold 3.1. For details and usage
-information on PyScaffold see https://pyscaffold.org/.
+runs ikwilnaarhuis with 
+
+``ikwilnaarhuis -t 9 15``
+
+runs ikwilnaarhuis with 
+
+``ikwilnaarhuis -t 9 15 -l 60``
+
+
+``ikwilnaarhuis -v`` or ``ikwilnaarhuis --version``
