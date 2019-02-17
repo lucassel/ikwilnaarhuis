@@ -4,6 +4,8 @@ ikwilnaarhuis
 
 A (cross-platform) Python CLI tool to help people who feel like 'IK WIL NAAR HUIS'.
 
+.. image:: ./src/ikwilnaarhuis.jpeg
+
 
 Usage
 ===========
