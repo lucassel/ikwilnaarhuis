@@ -5,6 +5,7 @@ import datetime
 import getpass
 import sys
 from datetime import date, time
+from pyfiglet import Figlet
 
 import colorama
 import pkg_resources  # part of setuptools
@@ -73,18 +74,20 @@ def process_input(args):
         '-m', '--milestones', help="Use -m or --milestones to print out various milestones", action='store_true')
     parser.add_argument('-v', '--version',
                         help="Use -v or --version to print out 'ikwilnaarhuis' latest installed version", action='store_true')
-
     return parser
 
 
 def main():
 
     colorama.init()
+
+    custom_fig = Figlet(font='standard')
+    print(custom_fig.renderText('ikwilnaarhuis'))
+
     now = datetime.datetime.now()
     lunch = 60
     input = sys.argv[1:]
     parser = process_input(input)
-
     namespace = parser.parse_args(input)
     args = parser.parse_args()
 
