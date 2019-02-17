@@ -57,28 +57,35 @@ def daycheck(weekday):
         print(colored(greeting, 'cyan'))
 
 
+def process_input(args):
+
+    # we got some --parameters allright
+    parser = argparse.ArgumentParser(
+        description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS (a lot). This project is a testbed for cross platform Python software development and deployment, utilising practices as unit testing, code coverage, continous deployment.")
+
+    parser.add_argument('integers', type=int, nargs='*',
+                        help="Default behaviour, run 'ikwilnaarhuis 9 15' to start your day at 9:15. Optionally, just run 'ikwilnaarhuis' to start your day at the script's runtime.", default=[])
+    parser.add_argument('-t', '--time', nargs="+", type=int,
+                        help='Use -t or --time to strictly input time, completely optional.')
+    parser.add_argument("-l", "--lunch", type=int, required=False,
+                        help="Use -l or --lunch to enter a lunch break in minutes.")
+    parser.add_argument(
+        '-m', '--milestones', help="Use -m or --milestones to print out various milestones", action='store_true')
+    parser.add_argument('-v', '--version',
+                        help="Use -v or --version to print out 'ikwilnaarhuis' latest installed version", action='store_true')
+
+    return parser
+
+
 def main():
 
     colorama.init()
     now = datetime.datetime.now()
     lunch = 60
+    input = sys.argv[1:]
+    parser = process_input(input)
 
-    # we got some --parameters allright
-    parser = argparse.ArgumentParser(
-        description="IK WIL NAAR HUIS, a CLI command line project for people that think IKWILNAARHUIS (a lot).")
-
-    parser.add_argument('integers', metavar='N', type=int, nargs='*',
-                        help='Time input without --time flag.', default=[])
-    parser.add_argument('-t', '--time', nargs="+", metavar='T', type=int,
-                        help='The time you started working in hours, optional')
-    parser.add_argument("-l", "--lunch", metavar='L', type=int, required=False,
-                        dest="lunch", help="Enter your lunch break in minutes.")
-    parser.add_argument('-m', '--milestones',
-                        help="print milestones", action='store_true')
-    parser.add_argument('-v', '--version',
-                        help="print version", action='store_true')
-
-    namespace = parser.parse_args(sys.argv[1:])
+    namespace = parser.parse_args(input)
     args = parser.parse_args()
 
     if namespace.version:
