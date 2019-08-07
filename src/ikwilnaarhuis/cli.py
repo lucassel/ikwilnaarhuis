@@ -74,6 +74,7 @@ def process_input(args):
         '-m', '--milestones', help="Use -m or --milestones to print out various milestones", action='store_true')
     parser.add_argument('-v', '--version',
                         help="Use -v or --version to print out 'ikwilnaarhuis' latest installed version", action='store_true')
+    parser.add_argument('-r', '--reverse', type=int, required=False, nargs='+')
     return parser
 
 
@@ -102,49 +103,64 @@ def main():
 
     daycheck(today.weekday())
 
-    if namespace.integers:
-        start_hour = args.integers[0]
-        try:
-            start_minutes = args.integers[1]
-        except:
-            start_minutes = 0
-
-        print(colored("⏰ Specified starting time: {}:{}".format(
-            start_hour, start_minutes), 'blue'))
-
-    elif namespace.time:
-        start_hour = args.time[0]
-        try:
-            start_minutes = args.time[1]
-        except:
-            start_minutes = 0
-
-        print(colored(
-            "⏰ Specified starting --time: {}:{}".format(start_hour, start_minutes), 'blue'))
-
-    else:
-        start_hour = now.hour
-        start_minutes = now.minute
-        print(colored(
-            "⚠ You executed 'ikwilnaarhuis' without specifying a time, using current time!", 'yellow'))
-
     if namespace.lunch:
-        print(colored("🍽 Specified --lunch break of {} minutes".format(args.lunch), 'blue'))
+        print(
+            colored("🍽 Specified --lunch break of {} minutes".format(args.lunch), 'blue'))
         lunch = args.lunch
 
     else:
         print(colored(
             "🍽 No --lunch specified, using default of {} minutes!".format(lunch), 'yellow'))
 
-    print("\n")
-    print(colored("⏰ Your starting time is {} : {}.".format(
-        start_hour, str(start_minutes).zfill(2)), 'cyan'))
+    if namespace.reverse:
+        leave_hour = args.reverse[0]
+        try:
+            leave_minutes = args.reverse[1]
+        except:
+            leave_minutes = 0
+        print(f"you wanne leave at {leave_hour}:{leave_minutes}")
+        dt = constructDate(leave_hour, leave_minutes)
 
-    enter = constructDate(start_hour, start_minutes)
-    leave = calculateLeave(enter, lunch)
+        leave = (datetime.datetime.combine(today, dt) - datetime.timedelta(hours=7,
+                                                                           minutes=48) - datetime.timedelta(minutes=lunch)).time()
+        print(f"You betterr workkkk at {leave}")
 
-    print(colored("You are allowed to leave at " + leave.strftime("%H:%M") +
-                  ", you " + insults.long_insult() + ". 😍", 'green'))
+    else:
+        if namespace.integers:
+            start_hour = args.integers[0]
+            try:
+                start_minutes = args.integers[1]
+            except:
+                start_minutes = 0
+
+            print(colored("⏰ Specified starting time: {}:{}".format(
+                start_hour, start_minutes), 'blue'))
+
+        elif namespace.time:
+            start_hour = args.time[0]
+            try:
+                start_minutes = args.time[1]
+            except:
+                start_minutes = 0
+
+            print(colored(
+                "⏰ Specified starting --time: {}:{}".format(start_hour, start_minutes), 'blue'))
+
+        else:
+            start_hour = now.hour
+            start_minutes = now.minute
+            print(colored(
+                "⚠ You executed 'ikwilnaarhuis' without specifying a time, using current time!", 'yellow'))
+
+        print("\n")
+        print(colored("⏰ Your starting time is {} : {}.".format(
+            start_hour, str(start_minutes).zfill(2)), 'cyan'))
+
+        enter = constructDate(start_hour, start_minutes)
+        leave = calculateLeave(enter, lunch)
+
+        print(colored("You are allowed to leave at " + leave.strftime("%H:%M") +
+                      ", you " + insults.long_insult() + ". 😍", 'green'))
 
 
 if __name__ == "__main__":
