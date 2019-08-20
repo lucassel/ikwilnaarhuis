@@ -13,6 +13,7 @@ from pyinsults import insults
 from termcolor import colored
 
 today = date.today()
+worktime = datetime.timedelta(hours=7, minutes=48)
 
 
 def constructDate(uur, minuten):
@@ -28,24 +29,6 @@ def calculateLeave(enter, lunch):
 
 def days2months(days):
     return days/30
-
-
-def milestones():
-    first_day = datetime.date(2018, 6, 11)
-    amelie = datetime.date(2018, 8, 25)
-    one_year = datetime.date(2019, 6, 11)
-
-    delta = today - first_day
-    anniversary = one_year - today
-    gurl = today - amelie
-
-    print(colored("*** MILESTONES ***", 'magenta'))
-    print(colored("It's been {} days since you've started working at In The Pocket, that's about {} months! 👏".format(
-        delta.days, days2months(delta.days)), 'cyan'))
-    print("You've got {} days left till your work anniversary. 🎉".format(
-        anniversary.days))
-    print("You've been banging that sweet ass for {} days, that's about {} months 🍑".format(
-        gurl.days, days2months(gurl.days)))
 
 
 def daycheck(weekday):
@@ -97,10 +80,6 @@ def main():
         print("ikwilnaarhuis --version: {}".format(version))
         return
 
-    if namespace.milestones:
-        milestones()
-        return
-
     daycheck(today.weekday())
 
     if namespace.lunch:
@@ -118,12 +97,16 @@ def main():
             leave_minutes = args.reverse[1]
         except:
             leave_minutes = 0
-        print(f"you wanne leave at {leave_hour}:{leave_minutes}")
+        print("\n")
+        print(
+            f"So, you wanna leave at {str(leave_hour).zfill(2)}:{str(leave_minutes).zfill(2)}, {insults.long_insult()}?")
         dt = constructDate(leave_hour, leave_minutes)
 
         leave = (datetime.datetime.combine(today, dt) - datetime.timedelta(hours=7,
                                                                            minutes=48) - datetime.timedelta(minutes=lunch)).time()
-        print(f"You betterr workkkk at {leave}")
+
+        print(colored("You better workkkkk at " + leave.strftime("%H:%M") +
+                      ", you " + insults.long_insult() + ". 😍", 'green'))
 
     else:
         if namespace.integers:
