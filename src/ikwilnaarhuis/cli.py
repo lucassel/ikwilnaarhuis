@@ -22,8 +22,8 @@ def constructDate(uur, minuten):
 
 
 def calculateLeave(enter, lunch):
-    leave = (datetime.datetime.combine(today, enter) + datetime.timedelta(hours=7,
-                                                                          minutes=48) + datetime.timedelta(minutes=lunch)).time()
+    leave = (datetime.datetime.combine(today, enter) +
+             worktime + datetime.timedelta(minutes=lunch)).time()
     return leave
 
 
@@ -57,7 +57,8 @@ def process_input(args):
         '-m', '--milestones', help="Use -m or --milestones to print out various milestones", action='store_true')
     parser.add_argument('-v', '--version',
                         help="Use -v or --version to print out 'ikwilnaarhuis' latest installed version", action='store_true')
-    parser.add_argument('-r', '--reverse', type=int, required=False, nargs='+')
+    parser.add_argument('-r', '--reverse', type=int, required=False, nargs='+',
+                        help="Use -r or --reverse to enter a time you want to leave instead")
     return parser
 
 
