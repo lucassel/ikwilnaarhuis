@@ -26,6 +26,10 @@ Suppling the -t or --time parameters results in the same calculation as above.
 
 Suppling the -l or --lunch parameter allow you to enter a custom lunch break duration, rannging between 30 and 90 minutes.
 
+``ikwilnaarhuis -r 17 30``
+
+Supplying the -r or --reverse parameters allow you to calculate when you should start, given a specified time you want to leave. In this example, you would calculate the time you need to start working when you want to leave, assuming a standard lunch break of 60 minutes.
+
 ``ikwilnaarhuis -v`` or ``ikwilnaarhuis --version``
 
 Suppling the -v or --version allows you to check your version of the 'ikwilnaarhuis' tool.
