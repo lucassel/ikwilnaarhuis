@@ -12,7 +12,7 @@ Usage
 
 ``ikwilnaarhuis``
 
-Running the tool without supplying parameters calculates how long you should work, given your local time when running it, assuming a standard lunchtime of 60 minutes.
+Running the tool without supplying any parameter calculates how long you should work, assuming that the local time when you run it is the moment you started working, given a standard lunchtime of 60 minutes. Supply additional parameters, e.g. -l or --lunch, to alter the calculation.
 
 ``ikwilnaarhuis 9 15``
 
