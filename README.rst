@@ -16,11 +16,11 @@ Running the tool without supplying parameters calculates how long you should wor
 
 ``ikwilnaarhuis 9 15``
 
-Running the tool while supplying two integers (whole numbers) is considered the standard way of runninng it, calculateing how long you have to work if you stated at 09:15, assuming a standard lunch break of 60 minutes. 
+Running the tool while supplying two integers (whole numbers) is considered the standard way of running it, calculating how long you have to work if you stated at 09:15, assuming a standard lunch break of 60 minutes. 
 
 ``ikwilnaarhuis -t 9 15``
 
-Suppling the -t or --time parameters results in the same calculation as above.
+Suppling the -t or --time parameters results in the same calculation as above, calculating how long you have to work if you stated at 09:15, assuming a standard lunch break of 60 minutes. 
 
 ``ikwilnaarhuis -t 9 15 -l 60``
 
