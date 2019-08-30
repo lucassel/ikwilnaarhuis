@@ -2,7 +2,7 @@
 ikwilnaarhuis
 =============
 
-A (cross-platform) Python CLI tool to help people who feel like 'IK WIL NAAR HUIS'.
+A Python CLI tool to help out those people who often feel like 'IK WIL NAAR HUIS'.
 
 .. image:: ./src/ikwilnaarhuis.jpeg
 
@@ -11,17 +11,20 @@ Usage
 ===========
 
 ``ikwilnaarhuis``
-
+Running the tool without supplying parameters calculates how long you should work today if you need to work 7.8 hours.
 
 ``ikwilnaarhuis 9 15``
 
-runs ikwilnaarhuis with 
+Running the tool while supplying two integers (whole numbers) is considered the standard way of runninng it, calculateing how long you have to work if you stated at 09:15, assuming a standard lunch break of 60 minutes. 
 
 ``ikwilnaarhuis -t 9 15``
 
-runs ikwilnaarhuis with 
+Suppling the -t or --time parameters results in the same calculation as above.
 
 ``ikwilnaarhuis -t 9 15 -l 60``
 
+Suppling the -l or --lunch parameter allow you to enter a custom lunch break duration, rannging between 30 and 90 minutes.
 
 ``ikwilnaarhuis -v`` or ``ikwilnaarhuis --version``
+
+Suppling the -v or --version allows you to check your version of the 'ikwilnaarhuis' tool.
