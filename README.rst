@@ -11,6 +11,7 @@ Usage
 ===========
 
 ``ikwilnaarhuis``
+
 Running the tool without supplying parameters calculates how long you should work today if you need to work 7.8 hours.
 
 ``ikwilnaarhuis 9 15``
