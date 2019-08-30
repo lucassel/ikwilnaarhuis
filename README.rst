@@ -12,7 +12,7 @@ Usage
 
 ``ikwilnaarhuis``
 
-Running the tool without supplying parameters calculates how long you should work today if you need to work 7.8 hours.
+Running the tool without supplying parameters calculates how long you should work, given your local time when running it, assuming a standard lunchtime of 60 minutes.
 
 ``ikwilnaarhuis 9 15``
 
